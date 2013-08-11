@@ -1,0 +1,24 @@
+{
+    "name": "componentes-proyecto",
+    "description": "Componentes Proyecto",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "latest",
+        "mongoose": "latest",
+        "mongoose-user": "latest",
+        "connect-mongo": "latest",
+        "connect-flash": "latest",
+        "jade": "latest",
+        "async": "latest",
+        "underscore": "latest",
+        "passport": "latest",
+        "passport-google": "latest",
+        "passport-local": "latest",
+        "moment": "latest",
+        "cloudinary": "latest"
+    },
+    "engines": {
+        "node": "0.10.x",
+        "npm": "1.2.x"
+    }
+}
