@@ -5,7 +5,7 @@
 // Globals
 _MONGOOSE = require('mongoose');
 _DEBUG = "\033[31m \033[1m";
-env = process.env.NODE_ENV || 'staging';
+env = process.env.NODE_ENV || 'development';
 
 // Main dependecies
 var config = require('./config/config')[env];

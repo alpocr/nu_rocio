@@ -3,26 +3,8 @@ extends ../layouts/default
 block content
 	p Request a cert
 	form(name="ReqForm", method="post", action="/certificate")
-		input(type=hidden, name=cert_request, value="")
-		p
-			label Name: 
-			input(type="text", name="title")
-		p
-			label Password: 
-			input(type=password, name="password", value="")
-		p
-			input(type="submit", value="Submit", name="Send")
+		input(type=text, name=name, value="") Nombre
+		input(type=hidden, name="cert_request", value="")
+		input(type="submit", value="Submit", name="Send")
 
-  script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js')
-  script.
-    window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')
-
-  //- TODO: Google Analytics: change UA-XXXXX-X to be your site's ID.
-  script.
-    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src='//www.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
-
-  script(src='js/vendor/bootstrap.min.js')
-  script(src='js/main.js')
+	script(src='js/main.js')

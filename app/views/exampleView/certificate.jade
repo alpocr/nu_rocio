@@ -1,0 +1,16 @@
+extends ../layouts/default
+
+block content
+
+  script.
+    var nickname = "#{nickname}"; 
+    //- TODO: No carga nickname
+    var cert = "#{cert}";
+
+  h2 Certificate Request Successful
+  p Hit 'load' to load your certificate
+    form(name="ReqForm")
+      p 
+        input(type=submit, Name="Load", value="Submit")
+
+  script(src='js/certificate.js')

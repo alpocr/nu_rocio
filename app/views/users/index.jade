@@ -1,0 +1,25 @@
+extends ../layouts/default
+
+block content
+  a(href="users/new", class="btn btn-success") Crear #{title}
+  hr
+
+  legend Lista de #{title}
+  table(class="table table-hover")
+    thead
+      tr
+        th ID
+        th Nombre
+        th Apellido
+        th Perfil
+    tbody
+      - for (var i=0; i<users.length; i++)
+          tr
+            td 
+              a(href="users/#{users[i]._id}") #{users[i]._id}
+            td #{users[i].name}
+            td #{users[i].lastname}
+            td 
+              a(href="profiles/#{users[i].profile._id}") #{users[i].profile.name}
+
+

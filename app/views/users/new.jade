@@ -1,0 +1,28 @@
+extends ../layouts/default
+
+block content
+
+  h2: strong: a(href="/users")= title
+
+  form(method="post", action="users/create")
+    fieldset
+      legend Crear #{title}
+      div.form-group
+        label Nombre
+        input(type="text", class="form-control", placeholder="Nombre", name="name")
+      div.form-group
+        label Apellido
+        input(type="text", class="form-control", placeholder="Apellido", name="lastname")
+      div.form-group
+        label Username
+        input(type="text", class="form-control", placeholder="Username", name="username")
+      div.form-group
+        label Password
+        input(type="password", class="form-control", placeholder="Password", name="password")
+      div.form-group
+        label Perfil
+        select(class="selectpicker span2", name="profile")
+          - for (var i=0; i<profiles.length; i++)
+              option(value="#{profiles[i]._id}") #{profiles[i].name}
+
+      button(type="submit", class="btn btn-default") Crear

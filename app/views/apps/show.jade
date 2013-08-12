@@ -1,0 +1,34 @@
+extends ../layouts/default
+
+block content
+
+  h2: strong: a(href="/apps")= title
+  table(class="table table-hover")
+      thead
+        tr
+          th ID
+          th Nombre
+          th Descripción
+          th Path
+      tbody
+          tr
+            td #{app._id}
+            td #{app.name}
+            td #{app.description}
+            td #{app.path}
+
+  form(method="post", action="apps/update")
+    fieldset
+      legend Actualizar #{title}
+      input(type="hidden", value="#{app._id}", name="id")
+      div.form-group
+        label Nombre
+        input(type="text", class="form-control", placeholder="Nombre", name="name", value="#{app.name}")
+      div.form-group
+        label Descripción
+        input(type="text", class="form-control", placeholder="Descripción", name="description", value="#{app.description}")
+      div.form-group
+        label Path
+        input(type="text", class="form-control", placeholder="Path", name="description", value="#{app.path}")
+
+      button(type="submit", class="btn btn-default") Actualizar

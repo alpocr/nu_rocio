@@ -1,0 +1,16 @@
+extends ../layouts/default
+
+block content
+  h2: strong: a(href="/functions")= title
+
+  form(method="post", action="functions/create")
+    fieldset
+      legend Crear #{title}
+      div.form-group
+        label Nombre
+        input(type="text", class="form-control", placeholder="Nombre", name="name")
+      div.form-group
+        label Path
+        input(type="text", class="form-control", placeholder="Path", name="path")
+
+      button(type="submit", class="btn btn-default") Crear

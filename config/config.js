@@ -5,11 +5,11 @@
 module.exports = {
     development: {
         root: __dirname,
-        db: 'mongodb://localhost/sociometrika_matriz'
+        db: 'mongodb://localhost/db_componentes'
     },
     test: {
         root: __dirname,
-        db: 'mongodb://localhost/sociometrika_matriz'
+        db: 'mongodb://localhost/db_componentes'
     },
     staging: {
         root: __dirname,

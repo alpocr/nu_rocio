@@ -13,10 +13,25 @@ html
   link(rel="stylesheet", href="/css/normalize.min.css")  
   link(rel="stylesheet", href="/css/bootstrap.min.css")
     //- TODO: Maybe you don't want to use bootstrap, so take care yourself
-  link(rel="stylesheet", href="/css/main.css")
-  link(rel="stylesheet", href="/css/plugins.css")
+  link(rel="stylesheet", href="/css/main.min.css")
+  link(rel="stylesheet", href="/css/plugins.min.css")
   link(href='http://fonts.googleapis.com/css?family=Open+Sans:700italic,400', rel='stylesheet', type='text/css')
 
   script(src='js/vendor/modernizr-2.6.2.min.js')
   body    
-    block content
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js')
+    script.
+      window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')
+
+    //- TODO: Google Analytics: change UA-XXXXX-X to be your site's ID.
+    script.
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src='//www.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+
+    script(src='js/vendor/bootstrap.min.js')
+    script(src='js/plugins.min.js')
+
+    div.container
+      block content

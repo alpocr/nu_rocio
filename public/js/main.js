@@ -2,9 +2,11 @@ var authenticator = "server_magic";
 var keyTransportCert = null;
 var crmfObject = null;
 var form = document.forms[0];
+var tempPid;
 
 function onSmartCardChange(e) {
   console.log("Datos?:", e);
+  tempPid = e.tokenName;
   alert("TARJETA!");
   //window.location.reload();
 }
@@ -24,7 +26,7 @@ function validate()
   if (typeof(crypto.version) != "undefined") {
     crmfObject = crypto.generateCRMFRequest(
       "CN=" + form.name.value,
-      form.password.value,
+      tempPid,
       authenticator,
       keyTransportCert,
       "setCRMFRequest();",

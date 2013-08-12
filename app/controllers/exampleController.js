@@ -17,6 +17,24 @@ exports.exampleFunction = function(req, res) {
     });
 };
 
+exports.certificate = function(req, res) {
+    console.log("REQ: ", req.body);
+
+    /* TOOD: Capturar error */
+    res.render('exampleView/certificate', {
+        title: "Example View",
+        nickname: req.body.title,
+        cert: req.body.cert_request
+    });
+};
+
+exports.success = function(req, res) {
+
+    /* TOOD: Capturar error */
+    res.render('exampleView/success', {
+    });
+};
+
 //Create
 exports.create = function(req, res) {
     var exampleModel = new ExampleModel(req.body)

@@ -1,0 +1,22 @@
+extends ../layouts/default
+
+block content
+  h2: strong: a(href="/apps")= title
+
+  form(method="post", action="apps/create")
+    fieldset
+      legend Crear #{title}
+      div.form-group
+        label Nombre
+        input(type="text", class="form-control", placeholder="Nombre", name="name")
+      div.form-group
+        label Descripción
+        input(type="text", class="form-control", placeholder="Descripción", name="description")
+      div.form-group
+        label Path
+        input(type="text", class="form-control", placeholder="Path", name="path")
+      div.form-group
+        label Path
+        input(type="text", class="form-control", placeholder="Path", name="path")
+
+      button(type="submit", class="btn btn-default") Crear

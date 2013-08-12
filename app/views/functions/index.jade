@@ -1,0 +1,22 @@
+extends ../layouts/default
+
+block content
+  a(href="functions/new", class="btn btn-success") Crear #{title}
+  hr
+
+  legend Lista de #{title}
+  table(class="table table-hover")
+    thead
+      tr
+        th ID
+        th Nombre
+        th Path
+    tbody
+      - for (var i=0; i<fnctions.length; i++)
+          tr
+            td 
+              a(href="fnctions/#{fnctions[i]._id}") #{fnctions[i]._id}
+            td #{fnctions[i].name}
+            td #{fnctions[i].path}
+
+
