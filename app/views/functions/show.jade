@@ -11,19 +11,19 @@ block content
           th Path
       tbody
           tr
-            td #{functions._id}
-            td #{functions.name}
-            td #{functions.path}
+            td #{fnctions._id}
+            td #{fnctions.name}
+            td #{fnctions.path}
 
-  form(method="post", action="functionss/update")
+  form(method="post", action="functions/update")
     fieldset
       legend Actualizar #{title}
-      input(type="hidden", value="#{functions._id}", name="id")
+      input(type="hidden", value="#{fnctions._id}", name="id")
       div.form-group
         label Nombre
-        input(type="text", class="form-control", placeholder="Nombre", name="name", value="#{functions.name}")
+        input(type="text", class="form-control", placeholder="Nombre", name="name", value="#{fnctions.name}")
       div.form-group
         label Path
-        input(type="text", class="form-control", placeholder="Path", name="path", value="#{functions.path}")
+        input(type="text", class="form-control", placeholder="Path", name="path", value="#{fnctions.path}")
 
       button(type="submit", class="btn btn-default") Actualizar
