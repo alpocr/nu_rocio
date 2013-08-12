@@ -34,4 +34,13 @@ html
     script(src='js/plugins.min.js')
 
     div.container
+      div.navbar
+        a(class="navbar-brand", href="/") Inicio
+        ul(class="nav navbar-nav")
+          li: a(href="/users") Usuarios
+          li: a(href="/profiles") Perfiles
+          li: a(href="/apps") Apps
+          li: a(href="/modules") Módulos
+          li: a(href="/functions") Funciones
+
       block content

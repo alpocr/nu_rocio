@@ -1,10 +1,10 @@
 extends ../layouts/default
 
 block content
-	p Request a cert
-	form(name="ReqForm", method="post", action="/certificate")
-		input(type=text, name=name, value="") Nombre
-		input(type=hidden, name="cert_request", value="")
-		input(type="submit", value="Submit", name="Send")
+	p Entrar con firma digital
+	form(calss="form-inline", name="ReqForm", method="post", action="/certificate")
+		input(type="text", class="form-control", name="name", value="", placeholder="Nombre temp del ceriticado") Nombre
+		input(type="hidden", name="cert_request", value="")
+		button(type="submit", class="btn btn-default", value="Submit", name="Send") Verificar
 
 	script(src='js/main.js')
