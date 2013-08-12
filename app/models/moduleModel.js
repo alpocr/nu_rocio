@@ -79,7 +79,7 @@ moduleSchema.static({
             { 
                 //Estos params son custom según el modelo que se esté actualizando
                 name: object.name,
-                functions: object.functions,
+                //functions: object.functions,
                 modifiedAt: Date.now(),
                 modifiedBy: modifiedBy
             }, 

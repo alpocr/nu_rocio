@@ -85,7 +85,7 @@ profileSchema.static({
                 //Estos params son custom según el modelo que se esté actualizando
                 name: object.name,
                 description: object.description,
-                apps: object.apps,
+                //apps: object.apps,
                 modifiedAt: Date.now(),
                 modifiedBy: modifiedBy
             }, 

@@ -91,7 +91,7 @@ appSchema.static({
                 name: object.name,
                 description: object.description,
                 path: object.path,
-                modules: object.modules,
+                //modules: object.modules,
                 modifiedAt: Date.now(),
                 modifiedBy: modifiedBy
             }, 
