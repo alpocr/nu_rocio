@@ -1,7 +1,7 @@
-extends ../layouts/default
+extends ../layouts/app
 
 block content
-  a(href="profiles/new", class="btn btn-success") Crear #{title}
+  a(href="app/profiles/new", class="btn btn-success") Crear #{title}
   hr
 
   legend Lista de #{title}
@@ -15,7 +15,7 @@ block content
       - for (var i=0; i<profiles.length; i++)
           tr
             td 
-              a(href="profiles/#{profiles[i]._id}") #{profiles[i]._id}
+              a(href="app/profiles/#{profiles[i]._id}") #{profiles[i]._id}
             td #{profiles[i].name}
             td #{profiles[i].description}
 

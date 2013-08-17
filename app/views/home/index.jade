@@ -1,0 +1,39 @@
+extends ../layouts/home
+
+block content
+
+  div#logins.row
+    
+    div.col-lg-6
+      div#loginNormal.panel
+        div.panel-heading
+          h2.panel-title Login Normal
+        div.panel-body
+          form#loginNormal.form-horizontal(role="form", method="post", action="/auth/login")
+            div.form-group
+              label.col-lg-2.control-label Username
+              div.col-lg-10
+                input.form-control(type="text", name="username", placeholder="Username")
+            div.form-group
+              label.col-lg-2.control-label Password
+              div.col-lg-10
+                input.form-control(type="password", name="password", placeholder="Password")
+
+            div.form-group
+              label.col-lg-2.control-label
+              div.col-lg-offset-2.col-lg-10
+                input.btn.btn-default.btn-lg(type="submit", value="Entrar")
+
+    div.col-lg-6
+      div#loginFirma.panel
+        div.panel-heading
+          h2.panel-title Login Firma
+        div.panel-body
+          div.alert Primero debe conectar su tarjeta para continuar
+          form#loginFirma.form-horizontal(role="form", method="post", action="/auth/firma")
+            input(type="hidden", name="cert_request", value="")
+
+            input.btn.btn-default.btn-lg(type="submit", disabled, value="Entrar")
+  
+  //- Scripts
+  script(src='js/home.min.js')

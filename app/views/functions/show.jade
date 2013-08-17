@@ -1,8 +1,8 @@
-extends ../layouts/default
+extends ../layouts/app
 
 block content
 
-  h2: strong: a(href="/functions")= title
+  h2: strong: a(href="app/functions")= title
   table(class="table table-hover")
       thead
         tr
@@ -15,7 +15,7 @@ block content
             td #{fnction.name}
             td #{fnction.path}
 
-  form(method="post", action="functions/update")
+  form(method="post", action="app/functions/update")
     fieldset
       legend Actualizar #{title}
       input(type="hidden", value="#{fnction._id}", name="id")

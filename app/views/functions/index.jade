@@ -1,7 +1,7 @@
-extends ../layouts/default
+extends ../layouts/app
 
 block content
-  a(href="functions/new", class="btn btn-success") Crear #{title}
+  a(href="app/functions/new", class="btn btn-success") Crear #{title}
   hr
 
   legend Lista de #{title}
@@ -15,7 +15,7 @@ block content
       - for (var i=0; i<fnctions.length; i++)
           tr
             td 
-              a(href="functions/#{fnctions[i]._id}") #{fnctions[i]._id}
+              a(href="app/functions/#{fnctions[i]._id}") #{fnctions[i]._id}
             td #{fnctions[i].name}
             td #{fnctions[i].path}
 

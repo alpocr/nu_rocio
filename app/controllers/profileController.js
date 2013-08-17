@@ -43,17 +43,17 @@ exports.createIt = function(req, res) {
     profile.createIt(function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/profiles');
+            res.redirect('/app/profiles');
         }
     });
 }
 
-exports.readIt = function(req, res) {    
+exports.readIt = function(req, res) {
     Profile.readIt(req.params.objectId, function(err, result) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
             res.render('profiles/show', {
-                title: "Perfil "+ result._id,
+                title: "Perfil " + result._id,
                 profile: result
             });
         }
@@ -67,7 +67,7 @@ exports.updateIt = function(req, res) {
     Profile.updateIt(id, object, modifiedBy, function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/profiles');
+            res.redirect('/app/profiles');
         }
     });
 }
@@ -76,7 +76,7 @@ exports.deleteIt = function(req, res) {
     Profile.deleteIt(function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/profiles');
+            res.redirect('/app/profiles');
         }
     });
 }

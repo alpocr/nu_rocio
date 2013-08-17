@@ -19,12 +19,10 @@ var moduleSchema = new Schema({
             unique: true
         }
     },
-    functions:[
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Function"
-        }
-    ],
+    functions: [{
+        type: Schema.Types.ObjectId,
+        ref: "Function"
+    }],
     // Defaults     
     createdAt: {
         type: Date,
@@ -67,34 +65,34 @@ moduleSchema.static({
     readIt: function(id, callback) {
         console.log(_DEBUG + "READING MODULE..."); //DEBUG
         this.findOne({
-              _id: id
-            })
+            _id: id
+        })
             .populate("functions.name", "name").exec(callback)
     },
 
     updateIt: function(id, object, modifiedBy, callback) {
         console.log(_DEBUG + "UPDATING MODULE..."); //DEBUG
-        this.update(
-            { _id: id }, 
-            { 
+        this.update({
+                _id: id
+            }, {
                 //Estos params son custom según el modelo que se esté actualizando
                 name: object.name,
-                //functions: object.functions,
+                functions: object.functions,
                 modifiedAt: Date.now(),
                 modifiedBy: modifiedBy
-            }, 
+            },
             null, callback);
     },
 
     //No lo borra realmente, solo lo "deshabilita"
     deleteIt: function(id, modifiedBy, callback) {
         console.log(_DEBUG + "DELETING MODULE..."); //DEBUG
-        this.update(
-            { _id: id }, 
-            { 
+        this.update({
+                _id: id
+            }, {
                 modifiedBy: modifiedBy,
                 deletedAt: Date.now(), //Le quita el NULL default, y le pone la fecha de hoy
-            }, 
+            },
             null, callback);
     },
 

@@ -24,6 +24,10 @@ exports.index = function(req, res) {
     });
 };
 
+exports.auth = function(req, res) {
+
+};
+
 exports.new = function(req, res) {
     Profile.loadAll(function(err, result) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
@@ -43,12 +47,12 @@ exports.createIt = function(req, res) {
     user.createIt(function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/users');
+            res.redirect('/app/users');
         }
     });
 }
 
-exports.readIt = function(req, res) {    
+exports.readIt = function(req, res) {
     User.readIt(req.params.objectId, function(err, user) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
@@ -57,7 +61,7 @@ exports.readIt = function(req, res) {
                 if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
                 else {
                     res.render('users/show', {
-                        title: "Usuario "+ user._id,
+                        title: "Usuario " + user._id,
                         user: user,
                         profiles: profiles
                     });
@@ -74,7 +78,7 @@ exports.updateIt = function(req, res) {
     User.updateIt(id, object, modifiedBy, function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/users');
+            res.redirect('/app/users');
         }
     });
 }
@@ -83,7 +87,7 @@ exports.deleteIt = function(req, res) {
     User.deleteIt(function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/users');
+            res.redirect('/app/users');
         }
     });
 }

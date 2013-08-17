@@ -1,9 +1,9 @@
-extends ../layouts/default
+extends ../layouts/app
 
 block content
-  h2: strong: a(href="/apps")= title
+  h2: strong: a(href="app/apps")= title
 
-  form(method="post", action="apps/create")
+  form(method="post", action="app/apps/create")
     fieldset
       legend Crear #{title}
       div.form-group

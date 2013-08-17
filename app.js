@@ -5,7 +5,9 @@
 // Globals
 _MONGOOSE = require('mongoose');
 _DEBUG = "\033[31m \033[1m";
-env = process.env.NODE_ENV || 'development';
+var port = process.env.PORT || 5000;
+var env = process.env.NODE_ENV || 'development'; /* TODO: Set your current environment, change to "production" when ready */
+if (port != 5000) env = "staging";
 
 // Main dependecies
 var config = require('./config/config')[env];
@@ -47,7 +49,6 @@ app.set('view engine', 'jade');
 
 // Utils
 app.locals._ = require('underscore');
-var port = process.env.PORT || 5000;
 app.listen(port, function() {
     console.log(_DEBUG + "Listening on " + port);
 });

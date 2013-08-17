@@ -1,8 +1,8 @@
-extends ../layouts/default
+extends ../layouts/app
 
 block content
 
-  h2: strong: a(href="/profiles")= title
+  h2: strong: a(href="app/profiles")= title
   table(class="table table-hover")
       thead
         tr
@@ -15,7 +15,7 @@ block content
             td #{profile.name}
             td #{profile.description}
 
-  form(method="post", action="profiles/update")
+  form(method="post", action="app/profiles/update")
     fieldset
       legend Actualizar #{title}
       input(type="hidden", value="#{profile._id}", name="id")

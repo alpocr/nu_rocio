@@ -43,17 +43,17 @@ exports.createIt = function(req, res) {
     app.createIt(function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/apps');
+            res.redirect('/app/apps');
         }
     });
 }
 
-exports.readIt = function(req, res) {    
+exports.readIt = function(req, res) {
     App.readIt(req.params.objectId, function(err, result) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
             res.render('apps/show', {
-                title: "App "+ result._id,
+                title: "App " + result._id,
                 app: result
             });
         }
@@ -67,7 +67,7 @@ exports.updateIt = function(req, res) {
     App.updateIt(id, object, modifiedBy, function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/apps');
+            res.redirect('/app/apps');
         }
     });
 }
@@ -76,7 +76,7 @@ exports.deleteIt = function(req, res) {
     App.deleteIt(function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/apps');
+            res.redirect('/app/apps');
         }
     });
 }

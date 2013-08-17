@@ -36,17 +36,17 @@ exports.createIt = function(req, res) {
     fnction.createIt(function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/functions');
+            res.redirect('/app/functions');
         }
     });
 }
 
-exports.readIt = function(req, res) {    
+exports.readIt = function(req, res) {
     Fnction.readIt(req.params.objectId, function(err, result) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
             res.render('functions/show', {
-                title: "Función "+ result._id,
+                title: "Función " + result._id,
                 fnction: result
             });
         }
@@ -60,7 +60,7 @@ exports.updateIt = function(req, res) {
     Fnction.updateIt(id, object, modifiedBy, function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/functions');
+            res.redirect('/app/functions');
         }
     });
 }
@@ -69,7 +69,7 @@ exports.deleteIt = function(req, res) {
     Fnction.deleteIt(function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.redirect('/functions');
+            res.redirect('/app/functions');
         }
     });
 }

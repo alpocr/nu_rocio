@@ -3,45 +3,51 @@
    =================== */
 
 var LocalStrategy = require('passport-local').Strategy
+var User = _MONGOOSE.model('User');
 
 module.exports = function(passport, config) {
 
     passport.serializeUser(function(user, done) {
+        //console.log(_DEBUG + "SERIALIZING USER..."); //DEBUG
         done(null, user.id);
     });
 
     passport.deserializeUser(function(id, done) {
-        //The following method is an example of what you should do
-        //with your own db models
-
-        /*YourUserModel.yourCustomizedFindById(id, function(err, user) {
+        //console.log(_DEBUG + "DESERIALIZING USER..."); //DEBUG
+        User.findById(id, function(err, user) {
             done(err, user);
-        });*/
+        })
     });
 
-    passport.use(new LocalStrategy(
-        function(_username, _password, done) {
-            //The following method is an example of what you should do
-            //with your own db models
+    console.log(_DEBUG + "AUTHENTICATING..."); //DEBUG
 
-            /*YourUserModel.yourCustomizedFindOne({
-                username: _username
+    passport.use(new LocalStrategy({
+            usernameField: 'username',
+            passwordField: 'password'
+        },
+        function(username, password, done) {
+            User.findOne({
+                username: username,
+                password: password
             }, function(err, user) {
                 if (err) {
                     return done(err);
                 }
                 if (!user) {
+                    if (_DEBUG) console.log("Email incorrecto"); //DEBUG
                     return done(null, false, {
-                        message: 'Incorrect username.'
+                        message: 'Email incorrecto.'
                     });
                 }
-                if (!user.validPassword(_password)) {
+                if (!user.validPassword(password)) { /* TODO: Método de modelo */
+                    if (_DEBUG) console.log("Password incorrecto"); //DEBUG
                     return done(null, false, {
-                        message: 'Incorrect password.'
+                        message: 'Password incorrecto.'
                     });
                 }
+                if (_DEBUG) console.log("Usuario autenticado"); //DEBUG
                 return done(null, user);
-            });*/
+            });
         }
     ));
 }

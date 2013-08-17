@@ -1,8 +1,8 @@
-extends ../layouts/default
+extends ../layouts/app
 
 block content
 
-  h2: strong: a(href="/modules")= title
+  h2: strong: a(href="app/modules")= title
   table(class="table table-hover")
       thead
         tr
@@ -13,12 +13,24 @@ block content
             td #{module._id}
             td #{module.name}
 
-  form(method="post", action="modules/update")
+  form(method="post", action="app/modules/update")
     fieldset
       legend Actualizar #{title}
       input(type="hidden", value="#{module._id}", name="id")
       div.form-group
         label Nombre
         input(type="text", class="form-control", placeholder="Nombre", name="name", value="#{module.name}")
+
+      div.form-group
+        label Funciones
+        br
+
+        - for (var i = 0; i < functions.length; i++ )
+          div.checkbox: label
+            if (module.functions.indexOf(functions[i]._id) != -1)
+              input(type="checkbox", value="#{functions[i]._id}", name="functions[]", checked=true) 
+            else 
+              input(type="checkbox", value="#{functions[i]._id}", name="functions[]", checked=false) 
+            a(href="app/functions/#{functions[i]._id}") #{functions[i].name}
 
       button(type="submit", class="btn btn-default") Actualizar

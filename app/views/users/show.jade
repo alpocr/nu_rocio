@@ -1,4 +1,4 @@
-extends ../layouts/default
+extends ../layouts/app
 
 block content
 
@@ -16,9 +16,9 @@ block content
             td #{user.name}
             td #{user.lastname}
             td 
-              a(href="profiles/#{user.profile._id}") #{user.profile.name}
+              a(href="app/profiles/#{user.profile._id}") #{user.profile.name}
 
-  form(method="post", action="users/update")
+  form(method="post", action="app/users/update")
     fieldset
       legend Actualizar #{title}
       input(type="hidden", value="#{user._id}", name="id")
