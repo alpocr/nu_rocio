@@ -37,6 +37,7 @@ function terminateFirma() {
 }
 
 function cardIn(e) {
+    alert("CARD IN");
     tempPid = e.tokenName;
 
     $('#loginFirma .alert').addClass("alert-success");
@@ -45,6 +46,7 @@ function cardIn(e) {
 }
 
 function cardOut(e) {
+    alert("CARD OUT");
     $('#loginFirma .alert').removeClass("alert-success");
     $('#loginFirma .alert').text("Primero debe conectar su tarjeta para continuar.");
     $('#loginFirma .btn').attr({
