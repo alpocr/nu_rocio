@@ -29,6 +29,18 @@ block content
         input(type="text", class="form-control", placeholder="Descripción", name="description", value="#{app.description}")
       div.form-group
         label Path
-        input(type="text", class="form-control", placeholder="Path", name="description", value="#{app.path}")
+        input(type="text", class="form-control", placeholder="Path", name="path", value="#{app.path}")
+
+      div.form-group
+        label Módulos
+        br
+
+        - for (var i = 0; i < modules.length; i++ )
+          div.checkbox: label
+            if (app.modules.indexOf(modules[i]._id) != -1)
+              input(type="checkbox", value="#{modules[i]._id}", name="modules[]", checked=true) 
+            else 
+              input(type="checkbox", value="#{modules[i]._id}", name="modules[]", checked=false) 
+            a(href="app/modules/#{modules[i]._id}") #{modules[i].name}
 
       button(type="submit", class="btn btn-default") Actualizar

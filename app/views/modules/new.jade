@@ -9,13 +9,13 @@ block content
       div.form-group
         label Nombre
         input(type="text", class="form-control", placeholder="Nombre", name="name")
-
+          
       div.form-group
         label Funciones
         br
         - for (var i = 0; i < functions.length; i++ )
           div.checkbox: label
             input(type="checkbox", value="#{functions[i]._id}", name="functions[]") 
-            | #{functions[i].name}
+            a(href="app/functions/#{functions[i]._id}") #{functions[i].name}
 
       button(type="submit", class="btn btn-default") Crear

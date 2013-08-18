@@ -9,6 +9,7 @@ var appController = require('../app/controllers/appController');
 var moduleController = require('../app/controllers/moduleController');
 var functionController = require('../app/controllers/functionController');
 
+var dashboardController = require('../app/controllers/dashboardController');
 var exampleController = require('../app/controllers/exampleController');
 var passport = require('passport');
 
@@ -23,7 +24,7 @@ var auth = require('./middlewares/authorization');
    =================== */
 
 var passportLocalOptions = {
-    successRedirect: '/app/users',
+    successRedirect: '/dashboard',
     failureRedirect: '/'
 }
 
@@ -33,50 +34,58 @@ var passportLocalOptions = {
 
 module.exports = function(app) {
 
+    //Firma
+    app.post('/auth/firma', homeController.certificate);
+
     //Login
     app.get('/', homeController.index);
     app.post('/auth/login', passport.authenticate('local', passportLocalOptions));
     app.get('/app/logout', homeController.logout);
 
+    //Dashboard
+    app.get('/dashboard', auth.requiresLogin, dashboardController.index);
+    app.get('/dashboard/:appPath', auth.requiresLogin, dashboardController.showApp);
+    app.get('/dashboard/:appPath/:functionPath', auth.requiresLogin, dashboardController.showFunction);
+
     //Usuarios
-    app.get('/app/users', auth.requiresLogin, userController.index);
-    app.get('/app/users/new', auth.requiresLogin, userController.new);
-    app.get('/app/users/:objectId', auth.requiresLogin, userController.readIt);
-    app.post('/app/users/create', auth.requiresLogin, userController.createIt);
-    app.post('/app/users/update', auth.requiresLogin, userController.updateIt);
-    app.post('/app/users/delete', auth.requiresLogin, userController.deleteIt);
+    app.get('/app/users', auth.requiresAdmin, userController.index);
+    app.get('/app/users/new', auth.requiresAdmin, userController.new);
+    app.get('/app/users/:objectId', auth.requiresAdmin, userController.readIt);
+    app.post('/app/users/create', auth.requiresAdmin, userController.createIt);
+    app.post('/app/users/update', auth.requiresAdmin, userController.updateIt);
+    app.post('/app/users/delete', auth.requiresAdmin, userController.deleteIt);
 
     //Profiles
-    app.get('/app/profiles', auth.requiresLogin, profileController.index);
-    app.get('/app/profiles/new', auth.requiresLogin, profileController.new);
-    app.get('/app/profiles/:objectId', auth.requiresLogin, profileController.readIt);
-    app.post('/app/profiles/create', auth.requiresLogin, profileController.createIt);
-    app.post('/app/profiles/update', auth.requiresLogin, profileController.updateIt);
-    app.post('/app/profiles/delete', auth.requiresLogin, profileController.deleteIt);
+    app.get('/app/profiles', auth.requiresAdmin, profileController.index);
+    app.get('/app/profiles/new', auth.requiresAdmin, profileController.new);
+    app.get('/app/profiles/:objectId', auth.requiresAdmin, profileController.readIt);
+    app.post('/app/profiles/create', auth.requiresAdmin, profileController.createIt);
+    app.post('/app/profiles/update', auth.requiresAdmin, profileController.updateIt);
+    app.post('/app/profiles/delete', auth.requiresAdmin, profileController.deleteIt);
 
     //Apps
-    app.get('/app/apps', auth.requiresLogin, appController.index);
-    app.get('/app/apps/new', auth.requiresLogin, appController.new);
-    app.get('/app/apps/:objectId', auth.requiresLogin, appController.readIt);
-    app.post('/app/apps/create', auth.requiresLogin, appController.createIt);
-    app.post('/app/apps/update', auth.requiresLogin, appController.updateIt);
-    app.post('/app/apps/delete', auth.requiresLogin, appController.deleteIt);
+    app.get('/app/apps', auth.requiresAdmin, appController.index);
+    app.get('/app/apps/new', auth.requiresAdmin, appController.new);
+    app.get('/app/apps/:objectId', auth.requiresAdmin, appController.readIt);
+    app.post('/app/apps/create', auth.requiresAdmin, appController.createIt);
+    app.post('/app/apps/update', auth.requiresAdmin, appController.updateIt);
+    app.post('/app/apps/delete', auth.requiresAdmin, appController.deleteIt);
 
     //Modules
-    app.get('/app/modules', auth.requiresLogin, moduleController.index);
-    app.get('/app/modules/new', auth.requiresLogin, moduleController.new);
-    app.get('/app/modules/:objectId', auth.requiresLogin, moduleController.readIt);
-    app.post('/app/modules/create', auth.requiresLogin, moduleController.createIt);
-    app.post('/app/modules/update', auth.requiresLogin, moduleController.updateIt);
-    app.post('/app/modules/delete', auth.requiresLogin, moduleController.deleteIt);
+    app.get('/app/modules', auth.requiresAdmin, moduleController.index);
+    app.get('/app/modules/new', auth.requiresAdmin, moduleController.new);
+    app.get('/app/modules/:objectId', auth.requiresAdmin, moduleController.readIt);
+    app.post('/app/modules/create', auth.requiresAdmin, moduleController.createIt);
+    app.post('/app/modules/update', auth.requiresAdmin, moduleController.updateIt);
+    app.post('/app/modules/delete', auth.requiresAdmin, moduleController.deleteIt);
 
     //Functions
-    app.get('/app/functions', auth.requiresLogin, functionController.index)
-    app.get('/app/functions/new', auth.requiresLogin, functionController.new);
-    app.get('/app/functions/:objectId', auth.requiresLogin, functionController.readIt);
-    app.post('/app/functions/create', auth.requiresLogin, functionController.createIt);
-    app.post('/app/functions/update', auth.requiresLogin, functionController.updateIt);
-    app.post('/app/functions/delete', auth.requiresLogin, functionController.deleteIt);
+    app.get('/app/functions', auth.requiresAdmin, functionController.index)
+    app.get('/app/functions/new', auth.requiresAdmin, functionController.new);
+    app.get('/app/functions/:objectId', auth.requiresAdmin, functionController.readIt);
+    app.post('/app/functions/create', auth.requiresAdmin, functionController.createIt);
+    app.post('/app/functions/update', auth.requiresAdmin, functionController.updateIt);
+    app.post('/app/functions/delete', auth.requiresAdmin, functionController.deleteIt);
 
 
     // Example

@@ -28,13 +28,14 @@ var appSchema = new Schema({
         type: String,
         default: '',
         trim: true,
-    },
-    modules: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Module"
+        index: {
+            unique: true
         }
-    ],
+    },
+    modules: [{
+        type: Schema.Types.ObjectId,
+        ref: "Module"
+    }],
     // Defaults     
     createdAt: {
         type: Date,
@@ -77,43 +78,70 @@ appSchema.static({
     readIt: function(id, callback) {
         console.log(_DEBUG + "READING APP..."); //DEBUG
         this.findOne({
-              _id: id
-            })
-            .populate("modules.name", "name").exec(callback)
+            _id: id
+        })
+            .populate("modules", "name").exec(callback)
+    },
+
+    readByPath: function(path, callback) {
+        console.log(_DEBUG + "READING APP BY ROUTE..."); //DEBUG
+        this.findOne({
+            path: path
+        })
+            .populate("modules").exec(callback)
     },
 
     updateIt: function(id, object, modifiedBy, callback) {
         console.log(_DEBUG + "UPDATING APP..."); //DEBUG
-        this.update(
-            { _id: id }, 
-            { 
+        this.update({
+                _id: id
+            }, {
                 //Estos params son custom según el modelo que se esté actualizando
                 name: object.name,
                 description: object.description,
                 path: object.path,
-                //modules: object.modules,
+                modules: object.modules,
                 modifiedAt: Date.now(),
                 modifiedBy: modifiedBy
-            }, 
+            },
             null, callback);
     },
 
     //No lo borra realmente, solo lo "deshabilita"
     deleteIt: function(id, modifiedBy, callback) {
         console.log(_DEBUG + "DELETING APP..."); //DEBUG
-        this.update(
-            { _id: id }, 
-            { 
+        this.update({
+                _id: id
+            }, {
                 modifiedBy: modifiedBy,
                 deletedAt: Date.now(), //Le quita el NULL default, y le pone la fecha de hoy
-            }, 
+            },
             null, callback);
     },
 
     loadAll: function(callback) {
         console.log(_DEBUG + "LOADING APPS..."); //DEBUG
-        this.find().populate("modules.name", "name").sort('createdAt').exec(callback)
+        this.find().populate("modules").sort('createdAt').exec(callback)
     },
+
+    loadFromArray: function(array, callback) {
+        console.log(_DEBUG + "LOADING APP FROM ARRAY: ", array); //DEBUG
+        this.find({
+            '_id': {
+                $in: array
+            }
+        }).populate("modules", "name").sort('createdAt').exec(callback)
+    },
+
+    loadFromArrayByPath: function(array, path, callback) {
+        console.log(_DEBUG + "LOADING APP FROM ARRAY: ", array); //DEBUG
+        this.findOne({
+            '_id': {
+                $in: array
+            },
+            'path': path
+        }).exec(callback)
+    }
 });
 
 /* ===================

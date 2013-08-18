@@ -1,0 +1,12 @@
+extends ../layouts/dashboard
+
+block content
+
+  ol.breadcrumb
+    li: a(href="/dashboard") Dashboard
+    li: a(href="/dashboard/#{app.path}") #{app.name}
+    li: a(href="/dashboard/#{app.path}/#{fnction.path}") #{fnction.name}
+
+  div.row
+
+    h4 #{fnction.name}

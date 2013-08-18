@@ -1,0 +1,24 @@
+extends ../layouts/dashboard
+
+block content
+
+  ol.breadcrumb
+    li: a(href="/dashboard") Dashboard
+
+  div.row
+
+    if (profile == "Admin") 
+      div.col-lg-3
+        div.panel
+          div.panel-heading
+            a(href="app/users"): h4 Admin
+          div.panel-body
+            | Administración de plataforma
+
+    - for (var i=0; i<apps.length; i++)
+      div.col-lg-3
+        div.panel
+          div.panel-heading
+            a(href="/dashboard/#{apps[i].path}"): h4 #{apps[i].name}
+          div.panel-body
+            | #{apps[i].description}

@@ -13,32 +13,13 @@ html
   link(rel="stylesheet", href="/css/normalize.min.css")  
   link(rel="stylesheet", href="/css/bootstrap.min.css")
   link(rel="stylesheet", href="/css/default.min.css")
-  link(rel="stylesheet", href="/css/main.min.css")
   link(href='http://fonts.googleapis.com/css?family=Open+Sans:700italic,400', rel='stylesheet', type='text/css')
 
   script(src='js/vendor/modernizr-2.6.2.min.js')
-  body  
-
+  body    
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js')
     script.
-      window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')  
-
-    div.navbar(class="navbar-inverse navbar-fixed-top")
-      div.container
-        a.navbar-brand(href="/dashboard") App
-        div.nav-collapse
-          ul.nav.navbar-nav
-            li: a(href="/app/users") Usuarios
-            li: a(href="/app/profiles") Perfiles
-            li: a(href="/app/apps") Apps
-            li: a(href="/app/modules") Módulos
-            li: a(href="/app/functions") Funciones
-          ul.nav.navbar-nav.pull-right
-            li: a(href="/app/logout") Cerrar sesión
-
-    div.container 
-
-      block content
+      window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')
 
     //- TODO: Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.
@@ -49,5 +30,14 @@ html
 
     script(src='js/vendor/bootstrap.min.js')
     script(src='js/plugins.min.js')
-    script(src='js/admin.js?v=11')
 
+    div.navbar(class="navbar-inverse navbar-fixed-top")
+      div.container
+        a(class="navbar-brand", href='/dashboard') #{title}
+        div.nav-collapse
+          ul.nav.navbar-nav.pull-right
+            li: a(href="/app/logout") Cerrar sesión
+
+    div.container 
+
+      block content

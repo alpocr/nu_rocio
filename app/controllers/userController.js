@@ -42,6 +42,7 @@ exports.new = function(req, res) {
 
 exports.createIt = function(req, res) {
     console.log(_DEBUG + "Req:", req.body); //DEBUG
+    if (req.body.firma.trim() == "") req.body.firma = "N/A";
 
     var user = new User(req.body);
     user.createIt(function(err) {
@@ -61,7 +62,7 @@ exports.readIt = function(req, res) {
                 if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
                 else {
                     res.render('users/show', {
-                        title: "Usuario " + user._id,
+                        title: "Usuario: " + user.name + " " + user.lastname,
                         user: user,
                         profiles: profiles
                     });
@@ -72,9 +73,11 @@ exports.readIt = function(req, res) {
 }
 
 exports.updateIt = function(req, res) {
+    console.log(_DEBUG + "Req:", req.body); //DEBUG
     var object = req.body;
     var id = req.body.id;
-    var modifiedBy = null; /* TODO: Temp fix */
+    if (req.body.firma.trim() == "") req.body.firma = "N/A";
+    var modifiedBy = req.user._id;
     User.updateIt(id, object, modifiedBy, function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
@@ -84,7 +87,8 @@ exports.updateIt = function(req, res) {
 }
 
 exports.deleteIt = function(req, res) {
-    User.deleteIt(function(err) {
+    var modifiedBy = req.user._id;
+    User.deleteIt(id, modifiedBy, function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
             res.redirect('/app/users');

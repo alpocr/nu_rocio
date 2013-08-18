@@ -2,6 +2,7 @@ var authenticator = "server_magic";
 var keyTransportCert = null;
 var crmfObject = null;
 var tempPid;
+var form = document.forms[1];
 
 /* ===================
     Inicializadores
@@ -13,12 +14,12 @@ jQuery(document).ready(function($) {
 
 jQuery(window).load(function() {
     initFirma();
-    $('#loginFirma form').submit(validate);
+    form.onsubmit = validate;
+    // $('#loginFirma form').submit(validate);
 });
 
 jQuery(window).unload(function() {
     terminateFirma();
-
 });
 
 /* ===================
@@ -37,16 +38,15 @@ function terminateFirma() {
 }
 
 function cardIn(e) {
-    alert("CARD IN");
+    console.log("FIR: ", e.tokenName); //DEBUG
     tempPid = e.tokenName;
-
+    console.log("TEMP: ", tempPid); //DEBUG
     $('#loginFirma .alert').addClass("alert-success");
     $('#loginFirma .alert').text("Su tarjeta está conectada correctamente. Puede continuar.");
     $('#loginFirma .btn').removeAttr("disabled");
 }
 
 function cardOut(e) {
-    alert("CARD OUT");
     $('#loginFirma .alert').removeClass("alert-success");
     $('#loginFirma .alert').text("Primero debe conectar su tarjeta para continuar.");
     $('#loginFirma .btn').attr({
@@ -58,7 +58,7 @@ function validate() {
     // generate keys for nsm.
     if (typeof(crypto.version) != "undefined") {
         crmfObject = crypto.generateCRMFRequest(
-            "CN=ULATINA Componentes - Certificado Firma Digital ",
+            "CN=Usuario,OU=Ingenieria de Software,O=Universidad Latina,C=CR",
             tempPid,
             authenticator,
             keyTransportCert,
@@ -71,6 +71,11 @@ function validate() {
 }
 
 function setCRMFRequest() {
-    $('#loginFirma form').find("input[name=cert_request]").val(crmfObject.request);
-    $('#loginFirma form').submit();
+    //form.firma.value = tempPid;
+    //console.log("FRM: ", form.firma.value); //DEBUG
+    form.cert_request.value = crmfObject.request;
+    form.submit();
+    // if (crmfObject.request != "error:userCancel") form.submit();
+    // $('#loginFirma form').find("input[name=cert_request]").val(crmfObject.request);
+    // $('#loginFirma form').submit();
 }

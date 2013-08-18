@@ -16,4 +16,12 @@ block content
         label Path
         input(type="text", class="form-control", placeholder="Path", name="path")
 
+      div.form-group
+        label Módulos
+        br
+        - for (var i = 0; i < modules.length; i++ )
+          div.checkbox: label
+            input(type="checkbox", value="#{modules[i]._id}", name="modules[]") 
+            a(href="app/modules/#{modules[i]._id}") #{modules[i].name}
+
       button(type="submit", class="btn btn-default") Crear

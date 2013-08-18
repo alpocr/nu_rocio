@@ -54,10 +54,10 @@ exports.readIt = function(req, res) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
             Fnction.loadAll(function(err, functions) {
-                if (err) console.log(_DEBUG + "ERROR:", functions); //DEBUG
+                if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
                 else {
                     res.render('modules/show', {
-                        title: "Módulo " + module._id,
+                        title: "Módulo: " + module.name,
                         module: module,
                         functions: functions
                     });
@@ -83,7 +83,7 @@ exports.updateIt = function(req, res) {
 exports.deleteIt = function(req, res) {
     var id = req.body.id;
     var modifiedBy = req.user._id;
-    Module.deleteIt(function(err) {
+    Module.deleteIt(id, modifiedBy, function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
             res.redirect('/app/modules');

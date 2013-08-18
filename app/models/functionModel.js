@@ -19,7 +19,10 @@ var functionSchema = new Schema({
     path: {
         type: String,
         default: '',
-        trim: true
+        trim: true,
+        index: {
+            unique: true
+        }
     },
     // Defaults     
     createdAt: {
@@ -63,34 +66,42 @@ functionSchema.static({
     readIt: function(id, callback) {
         console.log(_DEBUG + "READING FUNCTION..."); //DEBUG
         this.findOne({
-              _id: id
-            })
+            _id: id
+        })
+            .exec(callback)
+    },
+
+    readByPath: function(path, callback) {
+        console.log(_DEBUG + "READING FUNCTION BY ROUTE..."); //DEBUG
+        this.findOne({
+            path: path
+        })
             .exec(callback)
     },
 
     updateIt: function(id, object, modifiedBy, callback) {
         console.log(_DEBUG + "UPDATING FUNCTION..."); //DEBUG
-        this.update(
-            { _id: id }, 
-            { 
+        this.update({
+                _id: id
+            }, {
                 //Estos params son custom según el modelo que se esté actualizando
                 name: object.name,
                 path: object.path,
-                modifiedAt: Date.now,
+                modifiedAt: Date.now(),
                 modifiedBy: modifiedBy
-            }, 
+            },
             null, callback);
     },
 
     //No lo borra realmente, solo lo "deshabilita"
     deleteIt: function(id, modifiedBy, callback) {
         console.log(_DEBUG + "DELETING FUNCTION..."); //DEBUG
-        this.update(
-            { _id: id }, 
-            { 
+        this.update({
+                _id: id
+            }, {
                 modifiedBy: modifiedBy,
                 deletedAt: Date.now(), //Le quita el NULL default, y le pone la fecha de hoy
-            }, 
+            },
             null, callback);
     },
 

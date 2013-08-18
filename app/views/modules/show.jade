@@ -33,4 +33,12 @@ block content
               input(type="checkbox", value="#{functions[i]._id}", name="functions[]", checked=false) 
             a(href="app/functions/#{functions[i]._id}") #{functions[i].name}
 
+        - for (var i = 0; i < apps.length; i++ )
+          div.checkbox: label
+            if (profile.apps.indexOf(apps[i]._id) != -1)
+              input(type="checkbox", value="#{apps[i]._id}", name="apps[]", checked=true) 
+            else 
+              input(type="checkbox", value="#{apps[i]._id}", name="apps[]", checked=false) 
+            a(href="app/apps/#{apps[i]._id}") #{apps[i].name}
+
       button(type="submit", class="btn btn-default") Actualizar

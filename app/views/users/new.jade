@@ -19,8 +19,13 @@ block content
       div.form-group
         label Password
         input(type="password", class="form-control", placeholder="Password", name="password")
+      div#loginFirma.form-group
+        label Firma (opcional)
+        div.alert Primero debe conectar su tarjeta para agregarla
+        input(type="hidden", name="firma", value="")
       div.form-group
         label Perfil
+        br
         select(class="selectpicker span2", name="profile")
           - for (var i=0; i<profiles.length; i++)
               option(value="#{profiles[i]._id}") #{profiles[i].name}

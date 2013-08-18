@@ -32,8 +32,8 @@ block content
           div.alert Primero debe conectar su tarjeta para continuar
           form#loginFirma.form-horizontal(role="form", method="post", action="/auth/firma")
             input(type="hidden", name="cert_request", value="")
-
+            //- input(type="hidden", name="firma", value="")
             input.btn.btn-default.btn-lg(type="submit", disabled, value="Entrar")
   
   //- Scripts
-  script(src='js/home.min.js')
+  script(src='js/home.js?v=10')

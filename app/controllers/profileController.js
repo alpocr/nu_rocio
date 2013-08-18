@@ -49,21 +49,28 @@ exports.createIt = function(req, res) {
 }
 
 exports.readIt = function(req, res) {
-    Profile.readIt(req.params.objectId, function(err, result) {
+    Profile.readIt(req.params.objectId, function(err, profile) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
-            res.render('profiles/show', {
-                title: "Perfil " + result._id,
-                profile: result
+            App.loadAll(function(err, apps) {
+                if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
+                else {
+                    res.render('profiles/show', {
+                        title: "Perfil: " + profile.name,
+                        profile: profile,
+                        apps: apps
+                    });
+                }
             });
         }
     });
 }
 
 exports.updateIt = function(req, res) {
+    console.log(_DEBUG + "Req:", req.body); //DEBUG
     var object = req.body;
     var id = req.body.id;
-    var modifiedBy = null; /* TODO: Temp fix */
+    var modifiedBy = req.user._id;
     Profile.updateIt(id, object, modifiedBy, function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
@@ -73,7 +80,9 @@ exports.updateIt = function(req, res) {
 }
 
 exports.deleteIt = function(req, res) {
-    Profile.deleteIt(function(err) {
+    var id = req.body.id;
+    var modifiedBy = req.user._id;
+    Profile.deleteIt(id, modifiedBy, function(err) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
             res.redirect('/app/profiles');

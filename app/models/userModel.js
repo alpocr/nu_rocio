@@ -31,6 +31,14 @@ var userSchema = new Schema({
     password: {
         type: String
     },
+    firma: {
+        type: String,
+        default: 'N/A'
+        /* TODO: Esto debería ser unique, pero entonces hay que cambiar el Default */
+        // index: {
+        //     unique: true
+        // }
+    },
     profile: {
         type: Schema.Types.ObjectId,
         ref: "Profile",
@@ -102,6 +110,9 @@ userSchema.static({
                 //Estos params son custom según el modelo que se esté actualizando
                 name: object.name,
                 lastname: object.lastname,
+                username: object.username,
+                password: object.password,
+                firma: object.firma,
                 profile: object.profile,
                 modifiedAt: Date.now(),
                 modifiedBy: modifiedBy

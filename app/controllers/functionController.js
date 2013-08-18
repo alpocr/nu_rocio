@@ -42,12 +42,12 @@ exports.createIt = function(req, res) {
 }
 
 exports.readIt = function(req, res) {
-    Fnction.readIt(req.params.objectId, function(err, result) {
+    Fnction.readIt(req.params.objectId, function(err, fnction) {
         if (err) console.log(_DEBUG + "ERROR:", err); //DEBUG
         else {
             res.render('functions/show', {
-                title: "Función " + result._id,
-                fnction: result
+                title: "Función: " + fnction.name,
+                fnction: fnction
             });
         }
     });
