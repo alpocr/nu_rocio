@@ -71,8 +71,7 @@ profileSchema.static({
         console.log(_DEBUG + "READING PROFILE..."); //DEBUG
         this.findOne({
             _id: id
-        })
-            .populate("apps").exec(callback)
+        }).exec(callback)
     },
 
     updateIt: function(id, object, modifiedBy, callback) {
@@ -104,7 +103,7 @@ profileSchema.static({
 
     loadAll: function(callback) {
         console.log(_DEBUG + "LOADING PROFILES..."); //DEBUG
-        this.find().populate("apps").sort('createdAt').exec(callback)
+        this.find().sort('createdAt').exec(callback)
     },
 });
 

@@ -67,7 +67,7 @@ moduleSchema.static({
         this.findOne({
             _id: id
         })
-            .populate("functions").exec(callback)
+            .exec(callback)
     },
 
     updateIt: function(id, object, modifiedBy, callback) {
@@ -98,7 +98,7 @@ moduleSchema.static({
 
     loadAll: function(callback) {
         console.log(_DEBUG + "LOADING MODULES..."); //DEBUG
-        this.find().populate("functions").sort('createdAt').exec(callback)
+        this.find().sort('createdAt').exec(callback)
     },
 
     loadFromArray: function(array, callback) {

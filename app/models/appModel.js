@@ -79,8 +79,7 @@ appSchema.static({
         console.log(_DEBUG + "READING APP..."); //DEBUG
         this.findOne({
             _id: id
-        })
-            .populate("modules", "name").exec(callback)
+        }).exec(callback)
     },
 
     readByPath: function(path, callback) {
@@ -121,7 +120,7 @@ appSchema.static({
 
     loadAll: function(callback) {
         console.log(_DEBUG + "LOADING APPS..."); //DEBUG
-        this.find().populate("modules").sort('createdAt').exec(callback)
+        this.find().sort('createdAt').exec(callback)
     },
 
     loadFromArray: function(array, callback) {
